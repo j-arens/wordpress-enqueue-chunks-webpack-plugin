@@ -19,11 +19,11 @@
   "author": "Josh Arens <josh@pro.photo> (https://github.com/j-arens)",
   "license": "MIT",
   "repository": {
-    "url": "",
+    "url": "https://github.com/j-arens/wordpress-enqueue-chunks-webpack-plugin",
     "type": "git"
   },
   "bugs": {
-    "url": ""
+    "url": "https://github.com/j-arens/wordpress-enqueue-chunks-webpack-plugin/issues"
   },
   "peerDependencies": {
     "webpack": "^4.0.0"
