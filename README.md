@@ -1,10 +1,10 @@
 ## What
 
-This is a simple webpack plugin that maps all of your entries and split chunks into a manifest. A simple PHP script is then generated with the aforementioned manifest and a few other variables. That script can then be used in WordPress projects to easily register any required scripts without having to keep track of changes from build to build. 
+This is a simple webpack plugin that maps all of your entries and split chunks into a manifest. A PHP script is then generated with the manifest and a few other variables. That script can then be used in WordPress projects to easily register any required scripts and it's dependencies without having to keep track of webpack compilation changes. 
 
 ## Why
 
-When utilizing Webpack's `splitChunks` optimization you won't always know what the final output will be. It can be a pain to keep track of any changes to the ouput and making sure all scripts plus it's depedencies are registered in WordPress.
+When utilizing Webpack's `splitChunks` optimization you won't always know what the final output will be. It can be a pain to keep track of any changes to the ouput and making sure all scripts and it's depedencies are registered in WordPress.
 
 For example, passing the following entries into Webpack could result in the following output depending on how `splitChunks` is configured:
 
@@ -19,9 +19,11 @@ For example, passing the following entries into Webpack could result in the foll
   - common-foo-bar.bundle.js
   - vendors-bar.bundle.js
   
-Making any number of changes in your `splitChunks` config could result in a totally different compilation result from Webpack. Instead of trying to manually keep track of the built scripts this plugin allows you to simply register a known entry script, and the PHP script generated will take care of registering it as well as any required chunks.
+Making any number of changes in your `splitChunks` config could result in a totally different compilation result from Webpack. This plugin will help you automate registering these scripts in WordPress without having to know what chunks are required for each script.
 
 ## How
+
+Require or autoload the generated PHP script in your project. Using the entries and output from above as an example, you can call `registerScript(['foo'])` and `foo.bundle.js` along with `vendors-foo.bundle.js`, `common-foo-bar.bundle.js`, and any other required chunks will automatically be registered with WordPress for you.
 
 #### Install
 
@@ -31,7 +33,7 @@ npm i -D wordpress-enqueue-chunks-webpack-plugin
 
 #### Usage
 
-In Webpack
+With Webpack
 
 | Name           | Type                | Required | Description                                                                                   |
 |----------------|---------------------|----------|-----------------------------------------------------------------------------------------------|
@@ -48,28 +50,31 @@ module.exports = {
   plugins: [
     new WordPressEnqueueChunksPlugin({
       assetsDir: 'path-to-your-built-scripts',
-      phpScriptDir: 'path-to-where-the-php-script-will-go',
+      phpScriptDir: 'where-the-php-script-should-go',
+      context: 'theme',
+      namespace: 'my-theme-js',
+      delimiter: '-',
     }),
   ],
 }
 ```
 
-In WordPress
+With WordPress
 
 ```php
 use function WordpressEnqueueChunksPlugin\registerScripts;
 
-// the args passed to wp_register_script can be filtered
-add_filter('wpecp/register/foo', function($args) {
-  array_push($args['deps'], 'media-editor', 'jquery');
-  return $args;
-});
+// register all scripts
+registerScripts();
 
 // register specific scripts
 registerScripts(['foo', 'bar']);
 
-// register all scripts
-registerScripts();
+// args passed to wp_register_script can be filtered for each script
+add_filter('wpecp/register/my-theme-js-foo', function($args) {
+  array_push($args['deps'], 'media-editor', 'jquery');
+  return $args;
+});
 
-wp_enqueue_script('foo');
+wp_enqueue_script('my-theme-js-foo');
 ```
