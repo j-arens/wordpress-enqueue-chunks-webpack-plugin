@@ -71,7 +71,7 @@ registerScripts();
 registerScripts(['foo', 'bar']);
 
 // args passed to wp_register_script can be filtered for each script
-add_filter('wpecp/register/my-theme-js-foo', function($args) {
+add_filter('wpecp/register/foo', function($args) {
   array_push($args['deps'], 'media-editor', 'jquery');
   return $args;
 });
