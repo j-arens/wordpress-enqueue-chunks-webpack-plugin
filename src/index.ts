@@ -4,9 +4,6 @@ import * as TemplateProcessor from './TemplateProcessor';
 import { Manifest, Options } from './type';
 
 export default class implements Plugin {
-
-    protected opts: Options;
-
     constructor(opts: Options) {
         const defaults = {
             assetsDir: process.cwd(),
@@ -17,6 +14,8 @@ export default class implements Plugin {
         };
         this.opts = Object.assign({}, defaults, opts);
     }
+
+    protected opts: Options;
 
     public apply(compiler: Compiler) {
         compiler.hooks.done.tap(
@@ -35,11 +34,7 @@ export default class implements Plugin {
         const { namespace, delimiter, phpScriptDir } = this.opts;
         const prefix = namespace ? `${namespace}${delimiter}` : '';
         const template = read('wordpressEnqueueChunksPlugin.php');
-        const processed = injectProps(template, {
-            ...this.opts,
-            manifest: JSON.stringify(manifest),
-            prefix,
-        });
+        const processed = JSON.stringify({ ...this.opts, manifest, prefix });
         write(processed, phpScriptDir, 'wordpressEnqueueChunksPlugin.php');
     }
 }

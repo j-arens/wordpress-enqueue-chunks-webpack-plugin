@@ -1,0 +1,43 @@
+{
+	"chunks": {
+		"common-e3-e1": {
+			"file": "common-e3-e1.bundle.js",
+			"hash": "5019612ded91799cf4eda7a1f9d34c70"
+		},
+		"vendors-e3-e1": {
+			"file": "vendors-e3-e1.bundle.js",
+			"hash": "8aaa67358acdf02ae49f09885f354507"
+		},
+		"e1": {
+			"file": "e1.bundle.js",
+			"hash": "090fe5782ce2f66f0c58fcdec365dcda"
+		},
+		"vendors-e2": {
+			"file": "vendors-e2.bundle.js",
+			"hash": "9b97be06ff170f939849d8b0af449c43"
+		},
+		"e2": {
+			"file": "e2.bundle.js",
+			"hash": "6df2508614973f820a52a0b7bb258f2a"
+		},
+		"vendors-e3": {
+			"file": "vendors-e3.bundle.js",
+			"hash": "7e7231a5dfd4dd85ff6d9b80d1801e60"
+		},
+		"e3": {
+			"file": "e3.bundle.js",
+			"hash": "9c8f8efeb55a41fb605ec4de31701779"
+		}
+	},
+	"entries": {
+		"e1": {
+			"deps": ["common-e3-e1", "vendors-e3-e1"]
+		},
+		"e2": {
+			"deps": ["vendors-e2"]
+		},
+		"e3": {
+			"deps": ["common-e3-e1", "vendors-e3-e1", "vendors-e3"]
+		}
+	}
+}

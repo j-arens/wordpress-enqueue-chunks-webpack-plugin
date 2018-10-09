@@ -1,0 +1,21 @@
+{
+    "name": "j-arens/wordpress-enqueue-chunks-plugin",
+    "description": "A webpack plugin that manages registering and enqueing split chunks in a wordpress environment",
+    "type": "library",
+    "require-dev": {
+        "kahlan/kahlan": "^4.3",
+        "eloquent/phony-kahlan": "^1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Josh Arnes",
+            "email": "josh@pro.photo"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "scripts": {
+        "test": "kahlan --config=dev/kahlan/config.php --reporter=verbose"
+    }
+}

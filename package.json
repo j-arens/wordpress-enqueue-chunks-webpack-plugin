@@ -11,7 +11,8 @@
     "prepublishOnly": "npm run lint && npm run build",
     "preversion": "npm run lint && npm run build",
     "postversion": "git push && git push --tags",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:php": "composer test",
+    "test": "npm run test:php"
   },
   "keywords": [
     "webpack",

@@ -25,7 +25,6 @@ function writeTemplate(template: string, dir: string, file: string) {
 }
 
 export function injectProps(template: string, props: object): string {
-    const header = read('header.txt');
     return eval('`' + template + '`'); // tslint:disable-line
 }
 
