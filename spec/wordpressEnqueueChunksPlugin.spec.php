@@ -155,9 +155,8 @@ describe('wordpressEnqueueChunksPlugin', function () {
         it('throws an exception if it could not register an asset', function () {
             $this->wp_register_script->returns(false);
             $this->call_user_func_array->returns($this->wp_register_script());
-            expect(function () {
-                register('e2', []);
-            })->toThrow(new AssetRegistrationException('Unable to register asset e2!'));
+            expect(function () {register('e2', []);})
+                ->toThrow(new AssetRegistrationException('Unable to register asset e2!'));
         });
     });
 });

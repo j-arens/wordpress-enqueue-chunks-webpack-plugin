@@ -25,7 +25,7 @@ function writeTemplate(template: string, dir: string, file: string) {
 }
 
 export function injectProps(template: string, props: object): string {
-    return eval('`' + template + '`'); // tslint:disable-line
+    return template.replace('{% props %}', JSON.stringify(props));
 }
 
 export const read = tryCatch<string>(

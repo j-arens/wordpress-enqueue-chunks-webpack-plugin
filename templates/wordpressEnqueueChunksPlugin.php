@@ -41,7 +41,7 @@ function get($key)
         return WPECP_TEST_CONFIG[$key];
     }
     if (is_null($config)) {
-        $config = json_decode('${props}', true);
+        $config = json_decode('{% props %}', true);
     }
     return isset($config[$key]) ? $config[$key] : null;
 }

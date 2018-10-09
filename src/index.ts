@@ -34,7 +34,7 @@ export default class implements Plugin {
         const { namespace, delimiter, phpScriptDir } = this.opts;
         const prefix = namespace ? `${namespace}${delimiter}` : '';
         const template = read('wordpressEnqueueChunksPlugin.php');
-        const processed = JSON.stringify({ ...this.opts, manifest, prefix });
+        const processed = injectProps(template, { ...this.opts, manifest, prefix });
         write(processed, phpScriptDir, 'wordpressEnqueueChunksPlugin.php');
     }
 }
