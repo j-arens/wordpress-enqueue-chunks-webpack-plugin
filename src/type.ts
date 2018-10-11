@@ -1,9 +1,9 @@
 import { compilation } from 'webpack';
 
 export interface Options {
-    context: 'plugin' | 'theme';
-    namespace: string;
-    delimiter: string;
+    context?: 'plugin' | 'theme';
+    namespace?: string;
+    delimiter?: string;
     assetsDir: string;
     phpScriptDir: string;
 }

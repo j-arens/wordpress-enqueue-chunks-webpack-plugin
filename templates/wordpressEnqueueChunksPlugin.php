@@ -157,7 +157,6 @@ function register($asset, array $args)
     $success = call_user_func_array('wp_register_script', $filtered);
     if (!$success) {
         throw new AssetRegistrationException("Unable to register asset $asset!");
-        return false;
     }
     return true;
 }
