@@ -6,16 +6,16 @@ import {
     Manifest,
 } from './type';
 
-const entriesMap = new Map();
-const chunksMap = new Map();
+export const entriesMap = new Map();
+export const chunksMap = new Map();
 
-const mapToObject = <T>(map: Map<any, any>): T | {} => Array.from(map.entries())
+export const mapToObject = <T>(map: Map<any, any>): T | {} => Array.from(map.entries())
     .reduce((obj, [ k, v ]) => {
         obj[String(k)] = v;
         return obj;
     }, {});
 
-function addEntry({ name, chunks }: ChunkGroup) {
+export function addEntry({ name, chunks }: ChunkGroup) {
     if (entriesMap.has(name)) {
         return;
     }
@@ -24,7 +24,7 @@ function addEntry({ name, chunks }: ChunkGroup) {
     });
 }
 
-function mapDependencies(name: string, chunks: compilation.Chunk[]): string[] {
+export function mapDependencies(name: string, chunks: compilation.Chunk[]): string[] {
     return chunks
         .filter(chunk => {
             addChunk(chunk);
@@ -33,7 +33,7 @@ function mapDependencies(name: string, chunks: compilation.Chunk[]): string[] {
         .map(c => c.name);
 }
 
-function addChunk({ name, hash, files }: compilation.Chunk) {
+export function addChunk({ name, hash, files }: compilation.Chunk) {
     if (chunksMap.has(name)) {
         return;
     }

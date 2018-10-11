@@ -1,6 +1,6 @@
 import { Compiler, Plugin, Stats } from 'webpack';
-import { makeManifest } from './ChunkMapper';
-import * as TemplateProcessor from './TemplateProcessor';
+import { makeManifest } from './chunk-mapper';
+import * as TemplateProcessor from './template-utils';
 import { Manifest, Options } from './type';
 
 export default class implements Plugin {
@@ -30,11 +30,11 @@ export default class implements Plugin {
     }
 
     protected makePhpScript(manifest: Manifest) {
-        const { read, write, injectProps } = TemplateProcessor;
+        const { readTemplate, writeTemplate, injectProps } = TemplateProcessor;
         const { namespace, delimiter, phpScriptDir } = this.opts;
         const prefix = namespace ? `${namespace}${delimiter}` : '';
-        const template = read('wordpressEnqueueChunksPlugin.php');
+        const template = readTemplate('wordpressEnqueueChunksPlugin.php');
         const processed = injectProps(template, { ...this.opts, manifest, prefix });
-        write(processed, phpScriptDir, 'wordpressEnqueueChunksPlugin.php');
+        writeTemplate(processed, phpScriptDir, 'wordpressEnqueueChunksPlugin.php');
     }
 }
