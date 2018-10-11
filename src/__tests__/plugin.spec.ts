@@ -1,5 +1,5 @@
-import * as compilation from '../../dev/fixtures/compilation';
 import Plugin from '../';
+import * as compilation from '../../dev/fixtures/compilation';
 const tp = require('../template-utils');
 const manifest = require('../../dev/fixtures/manifest.json');
 

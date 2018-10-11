@@ -1,5 +1,5 @@
-import * as cm from '../chunk-mapper';
 import * as compilation from '../../dev/fixtures/compilation';
+import * as cm from '../chunk-mapper';
 
 const clearMaps = () => {
     cm.chunksMap.clear();
@@ -16,7 +16,7 @@ describe('mapToObject()', () => {
         map.set(fn1, fn2);
         const result = cm.mapToObject(map);
         expect(result).toMatchObject({
-            rofl: 'lol',
+            "rofl": 'lol',
             '1234': 5678,
             '() => { }': fn2,
         });
