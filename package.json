@@ -1,6 +1,6 @@
 {
   "name": "wordpress-enqueue-chunks-webpack-plugin",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A webpack plugin that manages registering and enqueing split chunks in a wordpress environment",
   "main": "index.js",
   "scripts": {
