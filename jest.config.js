@@ -1,7 +1,8 @@
 module.exports = {
     moduleFileExtensions: [
         'js',
-        'ts'
+        'json',
+        'ts',
     ],
     testMatch: [
         '<rootDir>/src/__tests__/*.(js|ts)'
