@@ -1,7 +1,9 @@
 import * as compilation from '../../dev/fixtures/compilation';
 import Plugin from '../';
 const tp = require('../template-utils');
-const manifest = require('../../dev/fixtures/manifest.json');
+
+tp.writeTemplate = jest.fn();
+tp.injectProps = jest.fn();
 
 describe('Plugin', () => {
     let instance;
@@ -11,7 +13,6 @@ describe('Plugin', () => {
             assetsDir: 'location/of/assets',
             phpScriptDir: 'template/output/location',
         });
-        tp.writeTemplate = jest.fn();
     });
 
     describe('onHook()', () => {
@@ -25,7 +26,7 @@ describe('Plugin', () => {
 
     describe('makePhpScript', () => {
         it('prepares the script and outputs it', () => {
-            instance.makePhpScript(manifest);
+            instance.makePhpScript({});
             expect(tp.writeTemplate).toHaveBeenCalled();
         });
     });

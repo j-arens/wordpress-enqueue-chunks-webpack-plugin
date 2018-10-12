@@ -1,0 +1,21 @@
+steps:
+
+   #
+   # PHP
+   #
+
+  - name: 'composer:latest'
+    args: ['install']
+  - name: 'composer:latest'
+    args: ['composer', 'test']
+
+  #
+  # JS
+  #
+
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['ci']
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'lint']
+  - name: 'gcr.io/cloud-builders/npm'
+    args: ['run', 'test:js'] 
