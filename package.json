@@ -8,13 +8,14 @@
     "build:watch": "npm run build -- -w",
     "lint": "tslint src/**/*.ts",
     "lint:fix": "npm run lint -- --fix",
-    "prepublishOnly": "npm run lint && npm run build",
-    "preversion": "npm run lint && npm run build",
+    "prepublishOnly": "npm run preflight && npm run build",
+    "preversion": "npm run preflight && npm run build",
     "postversion": "git push && git push --tags",
     "test:php": "composer test",
     "test:js": "export NODE_ENV=test && jest --verbose",
     "test:watch": "npm run test:js -- --watch",
-    "test": "npm run test:php && npm run test:js"
+    "test": "npm run test:php && npm run test:js",
+    "preflight": "npm run lint && npm run test"
   },
   "keywords": [
     "webpack",
