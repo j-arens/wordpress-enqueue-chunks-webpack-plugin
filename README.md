@@ -1,10 +1,10 @@
 ## What
 
-This is a simple webpack plugin that maps all of your entries and split chunks into a manifest. A PHP script is then generated with the manifest and a few other variables. That script can then be used in WordPress projects to easily register any required scripts and it's dependencies without having to keep track of webpack compilation changes. 
+This is a simple webpack plugin that maps all of your entries and split chunks into a manifest. A PHP script is then generated with the manifest and a few other variables. That script can then be used in WordPress projects to easily register any required scripts and their dependencies without having to keep track of webpack compilation changes. 
 
 ## Why
 
-When utilizing Webpack's `splitChunks` optimization you won't always know what the final output will be. It can be a pain to keep track of any changes to the ouput and making sure all scripts and it's depedencies are registered in WordPress.
+When utilizing Webpack's `splitChunks` optimization you won't always know what the final output will be. It can be a pain to keep track of any changes to the ouput and making sure all scripts and their dependencies are being registered successfully in WordPress.
 
 For example, passing the following entries into Webpack could result in the following output depending on how `splitChunks` is configured:
 
@@ -19,7 +19,7 @@ For example, passing the following entries into Webpack could result in the foll
   - common-foo-bar.bundle.js
   - vendors-bar.bundle.js
   
-Making any number of changes in your `splitChunks` config could result in a totally different compilation result from Webpack. This plugin will help you automate registering these scripts in WordPress without having to know what chunks are required for each script.
+Making any number of changes in your `splitChunks` config could result in a totally different compilation result. This plugin will help you automate registering these scripts in WordPress without having to know what chunks are required for each script.
 
 ## How
 
@@ -47,6 +47,7 @@ With Webpack
 const { WordPressEnqueueChunksPlugin } = require('wordpress-enqueue-chunks-webpack-plugin');
 
 module.exports = {
+  ...
   plugins: [
     new WordPressEnqueueChunksPlugin({
       assetsDir: 'path-to-your-built-scripts',
@@ -56,6 +57,7 @@ module.exports = {
       delimiter: '-',
     }),
   ],
+  ...
 }
 ```
 
@@ -70,7 +72,7 @@ registerScripts();
 // register specific scripts
 registerScripts(['foo', 'bar']);
 
-// args passed to wp_register_script can be filtered for each script
+// args passed to wp_register_script can be filtered
 add_filter('wpecp/register/foo', function($args) {
   array_push($args['deps'], 'media-editor', 'jquery');
   return $args;
