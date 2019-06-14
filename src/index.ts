@@ -37,9 +37,7 @@ export default class implements Plugin {
         const props = { ...this.opts, manifest, prefix };
 
         if (extractJsonManifest) {
-            const chunksManifest = readTemplate('chunksManifest.json');
-            const processed = injectProps(chunksManifest, props);
-            writeTemplate(processed, phpScriptDir, 'chunksManifest.json');
+            writeTemplate(`{${JSON.stringify(props)}}`, phpScriptDir, 'chunksManifest.json');
         }
 
         const phpScriptTemplate = readTemplate('wordpressEnqueueChunksPlugin.php');
