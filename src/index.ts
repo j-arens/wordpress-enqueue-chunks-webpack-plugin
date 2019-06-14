@@ -9,6 +9,7 @@ export default class implements Plugin {
             assetsDir: process.cwd(),
             context: 'plugin',
             delimiter: '-',
+            jsonManifest: false,
             namespace: '',
             phpScriptDir: process.cwd(),
         };
@@ -26,15 +27,23 @@ export default class implements Plugin {
 
     public onHook({ compilation }: Stats) {
         const manifest = makeManifest(compilation);
-        this.makePhpScript(manifest);
+        this.makePhpScript(manifest, this.opts.jsonManifest);
     }
 
-    protected makePhpScript(manifest: Manifest) {
+    protected makePhpScript(manifest: Manifest, extractJsonManifest: boolean) {
         const { readTemplate, writeTemplate, injectProps } = TemplateProcessor;
         const { namespace, delimiter, phpScriptDir } = this.opts;
         const prefix = namespace ? `${namespace}${delimiter}` : '';
-        const template = readTemplate('wordpressEnqueueChunksPlugin.php');
-        const processed = injectProps(template, { ...this.opts, manifest, prefix });
+        const props = { ...this.opts, manifest, prefix };
+
+        if (extractJsonManifest) {
+            const chunksManifest = readTemplate('chunksManifest.json');
+            const processed = injectProps(chunksManifest, props);
+            writeTemplate(processed, phpScriptDir, 'chunksManifest.json');
+        }
+
+        const phpScriptTemplate = readTemplate('wordpressEnqueueChunksPlugin.php');
+        const processed = injectProps(phpScriptTemplate, props);
         writeTemplate(processed, phpScriptDir, 'wordpressEnqueueChunksPlugin.php');
     }
 }

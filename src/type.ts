@@ -1,10 +1,11 @@
 import { compilation } from 'webpack';
 
 export interface Options {
-    context?: 'plugin' | 'theme';
-    namespace?: string;
-    delimiter?: string;
     assetsDir: string;
+    context?: 'plugin' | 'theme';
+    delimiter?: string;
+    jsonManifest?: boolean;
+    namespace?: string;
     phpScriptDir: string;
 }
 

@@ -39,6 +39,7 @@ With Webpack
 |----------------|---------------------|----------|-----------------------------------------------------------------------------------------------|
 | `AssetsDir`    | `{string}`          | yes      | Path to your built scripts                                                                    |
 | `phpScriptDir` | `{string}`          | yes      | Path to where you want the generated PHP script to go                                         |
+| `jsonManifest` | `{boolean}`         | no       | If true, extracts the chunks manifest to a separate JSON file (defaults to false)         |
 | `namespace`    | `{string}`          | no       | Prefix added to the handle used when registering scripts with WordPress                       |
 | `delimiter`    | `{string}`          | no       | Specify a delimiter to be used between the namespace and script name when creating a handle   |
 | `context`      | `{plugin \| theme}` | no       | Defaults to plugin, tells the PHP script how to resolve the absolute path to the built assets |
