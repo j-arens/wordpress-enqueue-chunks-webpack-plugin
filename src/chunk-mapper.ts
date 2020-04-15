@@ -30,6 +30,7 @@ export function mapDependencies(name: string, chunks: compilation.Chunk[]): stri
             addChunk(chunk);
             return chunk.name !== name;
         })
+        .filter(chunk => chunk)
         .map(c => c.name);
 }
 
